@@ -8,3 +8,5 @@ class User(AbstractUser):
     def clean(self):
         if self.username.lower() == "botir":
             raise ValidationError(" botir degan username qo'yib bo'lmaydi ")
+
+
