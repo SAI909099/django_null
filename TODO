@@ -1,0 +1,36 @@
+
+AutoField  ->  ✅
+BigAutoField -> ✅
+BigIntegerField ->  ✅
+BinaryField -> ❌
+BooleanField -> ✅
+CharField-> ✅
+DateField -> ✅
+DateTimeField -> ?
+DecimalField -> ✅
+DurationField -> tushuntirish kerak ❌
+EmailField -> ✅
+FileField-> ✅
+FilePathField -> tushuntirish kere ❌
+FloatField -> ✅
+GeneratedField -> tushuntirish kere ❌
+GenericIPAddressField -> tushintirish kere ❌
+ImageField -> ✅
+IntegerField -> ✅
+JSONField -> ✅
+PositiveBigIntegerField -> adashmasam + lik kotta sonlar
+PositiveIntegerField    -> +lik sonlar
+PositiveSmallIntegerField -> + lik kichik sonlar
+SlugField -> slug
+SmallAutoField -> tushuntirish kere ❌
+SmallIntegerField -> tushuntirish kere ❌
+TextField -> text uchun
+TimeField -> vaqt uchun
+URLField -> url uchun
+UUIDField -> tushintirish kere ❌
+
+
+tushintirish kere bo'ganlar :
+UUIDField,  SmallIntegerField,   SmallAutoField
+
+jsonfield slugfield

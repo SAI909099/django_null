@@ -12,22 +12,15 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from os.path import join
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=7zz*tax2aivx53z4r4nys4apczureh8-anvulu(4b^lh849=v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -39,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps',
+    'django_jsonform'
 ]
 
 MIDDLEWARE = [
@@ -72,18 +66,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'root.wsgi.application'
 
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME" : "django_null_db",
+        "NAME": "django_null_db2",
         "USER": "postgres",
         "PASSWORD": "1",
-        "HOST":"localhost",
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
-
 
 AUTH_USER_MODEL = 'apps.User'
 
@@ -102,22 +94,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
 USE_TZ = True
-
-
 
 STATIC_URL = 'static/'
 STATIC_ROOT = join(BASE_DIR / 'static')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = join(BASE_DIR / 'media')
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
