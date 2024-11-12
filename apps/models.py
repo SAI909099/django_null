@@ -1,11 +1,14 @@
 from enum import unique
+from logging import exception
 
 import requests
 from django.contrib.auth.models import AbstractUser
+from django.core import exceptions
 
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Model, SlugField, URLField, DateTimeField, UUIDField, BigIntegerField, BigAutoField
+from django.db.models import Model, SlugField, URLField, DateTimeField, UUIDField, BigIntegerField, BigAutoField, \
+    IntegerChoices, IntegerField
 
 from django_jsonform.models.fields import JSONField
 from functools import partial
@@ -141,3 +144,42 @@ class ExampleModel(models.Model):
 
 def __str__(self):
         return self.name
+
+
+
+from django.db import models
+from calendar import month_name
+
+
+
+
+#
+# class Month(models.Model):
+#     class MonthChoice(models.IntegerChoices):
+#         choices = [(i, month_name[i]) for i in range(1, 13)]
+#
+#     month = models.IntegerField(choices=MonthChoice.choices)
+
+
+from django.db import models
+from django.core.exceptions import ValidationError
+from datetime import datetime
+
+def minute_validation(value):
+    current_minute = datetime.now().minute
+    if current_minute % 2 == 0:
+        raise ValidationError(
+            "bu vaqtda qo'sha olmaysiz ",
+            code='minute_error',
+            params={'value': current_minute}
+        )
+
+class MyModel(models.Model):
+    name = models.CharField(
+        max_length=100,
+        validators=[minute_validation],
+        error_messages={
+            'minute_error': "Minute %(value)s is not allowed; please try again later."
+        }
+    )
+    description = models.TextField()

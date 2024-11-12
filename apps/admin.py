@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product
+from .models import Product, MyModel
 
 from django.contrib import admin
 from .models import ExampleModel
@@ -59,3 +59,6 @@ class CategoryAdmin(admin.ModelAdmin):
 #
 #     created_at_local.short_description = 'Created At (Tashkent Time)'
 #     updated_at_local.short_description = 'Updated At (Tashkent Time)'
+@admin.register(MyModel)
+class Mymodel(admin.ModelAdmin):
+    pass
