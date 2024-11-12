@@ -10,6 +10,7 @@ DateTimeField -> ?
 DecimalField -> ✅
 DurationField -> tushuntirish kerak ❌
 EmailField -> ✅
+
 FileField-> ✅
 FilePathField -> tushuntirish kere ❌
 FloatField -> ✅
