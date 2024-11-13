@@ -1,9 +1,13 @@
 from django.contrib import admin
 
-from .models import Product, MyModel
+# from .models import Product, MyModel
 
 from django.contrib import admin
-from .models import ExampleModel
+
+from apps.models import Product
+
+
+# from .models import ExampleModel
 
 # @admin.register(Product)
 # class ProductAdmin(admin.ModelAdmin):
@@ -25,15 +29,15 @@ from .models import ExampleModel
 #     list_display = ('name', 'data','url','slug')
 #     search_fields = ('name', 'slug', 'data__size', 'data__color')
 
-from django.contrib import admin
-from .models import Category, Product
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('uuid', 'name')
-    search_fields = ('name',)
-    ordering = ('name',)
-    readonly_fields = ('uuid',)
+# from django.contrib import admin
+# from .models import Category, Product
+#
+# @admin.register(Category)
+# class CategoryAdmin(admin.ModelAdmin):
+#     list_display = ('uuid', 'name')
+#     search_fields = ('name',)
+#     ordering = ('name',)
+#     readonly_fields = ('uuid',)
 #
 #
 # @admin.register(Product)
@@ -59,6 +63,6 @@ class CategoryAdmin(admin.ModelAdmin):
 #
 #     created_at_local.short_description = 'Created At (Tashkent Time)'
 #     updated_at_local.short_description = 'Updated At (Tashkent Time)'
-@admin.register(MyModel)
-class Mymodel(admin.ModelAdmin):
+@admin.register(Product)
+class Product(admin.ModelAdmin):
     pass
