@@ -1,27 +1,45 @@
 import os
 import django
-from django.db.models import Count
+from django.db.models import Count, F, Sum, Q
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'root.settings')
 
 django.setup()
 
-from apps.models import Product, Person
-
-# print(Product.objects.filter(name='book'))
-
-
-# print(Product.objects.exclude(name='kitob'))
+from apps.models import Product, User
+from django.db.models import Sum
 #
-# for i in Product.objects.annotate(bir = Count('name')):
-#     print (i.name)
+# results = Product.objects.values('name', 'category__id').annotate(total=Sum('price'),count=Count('name'))
+#
+# for result in results:
+#     print(result)
 
-# products = Product.objects.annotate(name_count=Count('name'))
 
-# for product in products:
-#     print(product.name, product.name_count)
+from django.db.models import F
+from django.db.models.functions import Lower
+# from django.db import transaction
+#
+#
+# vowels = ('a', 'e', 'i', 'o', 'u', 'y')
+#
+# latest_user = User.objects.latest('date_joined')
+#
+# products = Product.objects.filter(user=latest_user)
+#
+# with transaction.atomic():
+#     for product in products:
+#         if product.name[0].lower() in vowels:
+#             product.price = F('price') + 1000
+#             product.save()
+#
+#     print(f"Product Name: {product.name}, Price: {product.price}")
+#
 
-# print(Product.objects.order_by('id'))
+#
+# user_info = User.objects.filter(date_join = 2020)
 
-# print(Person.objects.order_by('-age'))
-
+filters = Product.objects.filter(
+    Q(price__gte=2000, price__lte=3500) & Q(description__isnull=False) & Q(name__icontains='a')
+)
+for product in filters:
+    print(f"Name: {product.name}, Price: {product.price}, Description: {product.description}")

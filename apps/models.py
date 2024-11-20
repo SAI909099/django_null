@@ -1,7 +1,13 @@
+import uuid
+
 from django.contrib.auth.models import AbstractUser
+from django.core import exceptions
 
 from django.core.exceptions import ValidationError
-from django.db.models import Model, IntegerField, CharField
+from django.db.models import Model, IntegerField, CharField, ForeignKey, PositiveIntegerField, BigAutoField, UUIDField, \
+    SlugField, CASCADE
+from django.utils import timezone
+from django.utils.text import slugify
 
 
 class User(AbstractUser):
@@ -180,10 +186,30 @@ class User(AbstractUser):
 #
 # class Product(Model):
 #     def query
+
+def error_handler(value):
+    minute = timezone.now().minute
+    if minute % 2 != 0:
+        raise exceptions.ValidationError('xabar', code='sai', params={'value': value})
+    return value
+
+class Category(Model):
+    name = CharField(max_length=255)
+    id = BigAutoField(primary_key=True)
+    uuid = UUIDField(default=uuid.uuid4, editable=False, unique=True)  # unique=True qo'shildi
+    slug = SlugField(unique=True, blank=True, editable=False)
+
+    def save(self, *args, init_id=None, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
 class Product(Model):
-    name = CharField(max_length=250)
+    user = ForeignKey(User , CASCADE)
+    name = CharField(max_length=255, validators=[error_handler], error_messages={"ixlos": '%(value)s vatq juft emas6'})
+    category = ForeignKey('apps.Category', CASCADE, to_field='uuid')
+    price = PositiveIntegerField(default=0)
+    description = CharField(null=True)
 
-
-class Person(Model):
-    name = CharField (max_length=250)
-    age = IntegerField(null=True)
