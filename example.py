@@ -43,3 +43,7 @@ filters = Product.objects.filter(
 )
 for product in filters:
     print(f"Name: {product.name}, Price: {product.price}, Description: {product.description}")
+
+
+
+
